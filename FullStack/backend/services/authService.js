@@ -43,11 +43,9 @@ class AuthService {
         password: hashedPassword,
         departmentId: departmentId,
         teamId: teamId
-        // Include additional fields if necessary, e.g., name, isAdmin
       },
     });
 
-    // Optionally, return user info excluding the password
     return { id: user.id, email: user.email };
   }
 

@@ -102,16 +102,6 @@ const Dashboard = () => {
     }
   };
 
-  // const handleFilterChange = (department) => {
-  //   console.log(department)
-  //   setSelectedDepartment(department.department);
-  //   setSelectedTeam(department.team);
-  //   // const teamsForDepartment = teams.filter(
-  //   //   (team) => team.departmentId === department.department
-  //   // );
-  //   console.log(selectedDepartment, selectedTeam)
-  //   // setFilteredTeams(teamsForDepartment);
-  // };
 
   useEffect(() => {
     fetchUsers();

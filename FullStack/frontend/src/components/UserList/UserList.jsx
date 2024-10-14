@@ -12,8 +12,6 @@ const usersData = [
 ];
 
 const UserList = () => {
-  // const [selectedDepartment, setSelectedDepartment] = useState("");
-  // const [selectedTeam, setSelectedTeam] = useState("");
   const navigate = useNavigate(); // Use useNavigate instead of useHistory
   const [departmentList, setDepartmentList] = useState([]);
   const [department, setDepartment] = useState(null);

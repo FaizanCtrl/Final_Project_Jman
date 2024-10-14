@@ -212,8 +212,4 @@ function UserLayout(props) {
   );
 }
 
-// UserLayout.propTypes = {
-//   window: PropTypes.func,
-// };
-
 export default UserLayout;

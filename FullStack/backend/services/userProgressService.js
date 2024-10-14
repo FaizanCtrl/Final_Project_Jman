@@ -12,7 +12,6 @@ class UserProgressService {
     });
   }
 
-  // Add more methods as needed
 }
 
 module.exports = new UserProgressService();

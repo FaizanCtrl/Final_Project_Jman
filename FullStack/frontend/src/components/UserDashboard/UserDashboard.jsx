@@ -49,13 +49,8 @@ const UserDashboard = () => {
   return (
     <Container fluid className="p-4 h-100">
       <Row>
-        <Col md={4}>
-          {/* <UserProfile user={user} /> */}
-        </Col>
-        <Col md={8}>
-          {/* <MySkills skills={skills} /> */}
-          {/* <SkillsToAcquire skillsToAcquire={skillsToAcquire} /> */}
-        </Col>
+        <Col md={4}></Col>
+        <Col md={8}></Col>
       </Row>
     </Container>
   );
