@@ -1,0 +1,24 @@
+id,name,departmentId
+1,Frontend,1
+2,Backend,1
+3,Full Stack,1
+4,QA,2
+5,Automation,2
+6,Performance,2
+7,Cloud,3
+8,Infrastructure,3
+9,Security,3
+10,Product Design,4
+11,Product Analysis,4
+12,Recruitment,5
+13,Training,5
+14,Inside Sales,6
+15,Field Sales,6
+16,Content Marketing,7
+17,SEO,7
+18,Technical Support,8
+19,Customer Success,8
+20,Help Desk,9
+21,Network Administration,9
+22,Innovation,10
+23,Prototyping,10

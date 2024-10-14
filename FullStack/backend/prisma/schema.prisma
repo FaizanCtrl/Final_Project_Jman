@@ -1,0 +1,143 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int            @id @default(autoincrement())
+  name         String
+  email        String         @unique
+  password     String
+  isAdmin      Boolean        @default(false)
+  department   Department?    @relation(fields: [departmentId], references: [id])
+  departmentId Int?
+  team         Team?          @relation(fields: [teamId], references: [id])
+  teamId       Int?
+  Result       Result[]
+  Post         Post[]
+  Feedback     Feedback[]
+  UserProgress UserProgress[]
+  UserSession  UserSession[]
+}
+
+model Department {
+  id    Int    @id @default(autoincrement())
+  name  String
+  teams Team[] // A department can have multiple teams
+  users User[] // Optional: If users are associated with departments
+}
+
+model Team {
+  id           Int        @id @default(autoincrement())
+  name         String
+  departmentId Int // Foreign key referencing Department
+  department   Department @relation(fields: [departmentId], references: [id])
+  users        User[] // A team can have multiple users
+  Course       Course[] // A team can have multiple courses
+}
+
+model Course {
+  id                Int                @id @default(autoincrement())
+  name              String
+  content           String
+  team              Team?              @relation(fields: [teamId], references: [id])
+  teamId            Int? // Foreign key referencing Team
+  learningMaterials LearningMaterial[]
+  Quiz              Quiz[]
+  Post              Post[]
+  Feedback          Feedback[]
+}
+
+model LearningMaterial {
+  id       Int            @id @default(autoincrement())
+  title    String
+  type     String // e.g., article
+  content  String // text content
+  course   Course         @relation(fields: [courseId], references: [id])
+  courseId Int
+  quiz     Quiz?          @relation(fields: [quizId], references: [id])
+  quizId   Int?
+  progress UserProgress[]
+}
+
+model UserProgress {
+  id                 Int              @id @default(autoincrement())
+  user               User             @relation(fields: [userId], references: [id])
+  userId             Int
+  learningMaterial   LearningMaterial @relation(fields: [learningMaterialId], references: [id])
+  learningMaterialId Int
+  completed          Boolean          @default(false)
+  completedAt        DateTime?
+
+  @@unique([userId, learningMaterialId]) // Add this line
+}
+
+model Quiz {
+  id               Int                @id @default(autoincrement())
+  course           Course             @relation(fields: [courseId], references: [id])
+  courseId         Int
+  questions        Question[]
+  Result           Result[]
+  LearningMaterial LearningMaterial[]
+}
+
+model Question {
+  id            Int    @id @default(autoincrement())
+  quiz          Quiz   @relation(fields: [quizId], references: [id])
+  quizId        Int
+  questionText  String
+  answerA       String
+  answerB       String
+  answerC       String
+  answerD       String
+  correctAnswer Int
+}
+
+model Result {
+  id         Int  @id @default(autoincrement())
+  user       User @relation(fields: [userId], references: [id])
+  userId     Int
+  quiz       Quiz @relation(fields: [quizId], references: [id])
+  quizId     Int
+  score      Int
+  totalScore Int
+  @@unique([userId, quizId]) // This defines the composite unique constraint
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  Int
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  content   String
+  rating    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  Int
+}
+
+model UserSession {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  duration  Int? // duration in seconds
+}

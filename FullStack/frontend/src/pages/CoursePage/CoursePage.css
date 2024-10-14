@@ -1,0 +1,19 @@
+.hover-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .hover-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    cursor: pointer; /* Change cursor to pointer */
+  }
+  
+  .star {
+    font-size: 24px; /* Adjust size as needed */
+    color: gray; /* Default color for unfilled stars */
+  }
+  
+  .star.filled {
+    color: gold; /* Color for filled stars */
+  }
+  
